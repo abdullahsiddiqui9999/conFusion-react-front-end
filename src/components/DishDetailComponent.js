@@ -15,29 +15,6 @@ class DishDetail extends Component {
     super(props);
   }
 
-  formattedDate(date) {
-    if (!(date instanceof Date)) date = new Date(date);
-
-    const monthNames = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "June",
-      "July",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-
-    return `${
-      monthNames[date.getMonth()]
-    } ${date.getDate()}, ${date.getFullYear()}`;
-  }
-
   renderComments(comments) {
     if (comments && comments.length > 0) {
       return (
@@ -49,7 +26,12 @@ class DishDetail extends Component {
               <li key={comment.id}>
                 <p>{comment.comment}</p>
                 <p>
-                  -- {comment.author}, {this.formattedDate(comment.date)}
+                  -- {comment.author},{" "}
+                  {new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                  }).format(new Date(Date.parse(comment.date)))}
                 </p>
               </li>
             ))}
@@ -76,12 +58,16 @@ class DishDetail extends Component {
   render() {
     const { dish } = this.props;
 
-    return (
-      <div className="row">
-        <div className="col-12 col-md-5 m-1">{this.renderDish(dish)}</div>
+    return dish ? (
+      <div className="container">
+        <div className="row">
+          <div className="col-12 col-md-5 m-1">{this.renderDish(dish)}</div>
 
-        {this.renderComments(dish.comments)}
+          {this.renderComments(dish.comments)}
+        </div>
       </div>
+    ) : (
+      <div></div>
     );
   }
 }
