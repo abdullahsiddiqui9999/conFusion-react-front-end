@@ -9,28 +9,33 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import CommentForm from "./CommentFormComponent";
 
 function RenderComments({ comments }) {
   if (comments && comments.length > 0) {
     return (
-      <div className="col-12 col-md ml-1">
-        <h4>Comments</h4>
+      <div className="row">
+        <div className="col-12 col-md ml-1">
+          <h4>Comments</h4>
 
-        <ul className="list-unstyled">
-          {comments.map((comment) => (
-            <li key={comment.id}>
-              <p>{comment.comment}</p>
-              <p>
-                -- {comment.author},{" "}
-                {new Intl.DateTimeFormat("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "2-digit",
-                }).format(new Date(Date.parse(comment.date)))}
-              </p>
-            </li>
-          ))}
-        </ul>
+          <ul className="list-unstyled">
+            {comments.map((comment) => (
+              <li key={comment.id}>
+                <p>{comment.comment}</p>
+                <p>
+                  -- {comment.author},{" "}
+                  {new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                  }).format(new Date(Date.parse(comment.date)))}
+                </p>
+              </li>
+            ))}
+          </ul>
+
+          <CommentForm />
+        </div>
       </div>
     );
   } else {
