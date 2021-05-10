@@ -27,10 +27,12 @@ class Contact extends Component {
   }
 
   handleSubmit(values) {
-    console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
-    this.props.resetFeedbackForm();
-    // event.preventDefault();
+    // this.props.resetFeedbackForm();
+
+    // NOTE: Reset form action is dispatched in postFeedback method when the form is successfully submitted. Incase of any
+    // failure in submission we want to keep our form persisted. This is why I have commented out this line from here.
+
+    this.props.postFeedback(values);
   }
 
   render() {
