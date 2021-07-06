@@ -1,6 +1,6 @@
-# ConFusion React App
+# ConFusion
 
-This is the React App of conFusion project.
+This is the React App of project named conFusion.
 
 ## Available Scripts
 
